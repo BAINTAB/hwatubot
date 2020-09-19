@@ -44,11 +44,10 @@ async def on_message(message):
     if message.content == "!섯다 시작":
         if start != 1:
             cards.clear()
-            for i in range(1,11)
+            for i in range(1,11):
                 cards.append("{i}")
-            for i in range(1,11)
-                cards.append("__"+"{i}"+"__") 
-            
+            for i in range(1,11):
+                cards.append("__"+"{i}"+"__")
             await message.channel.send("모든 카드 섞기 완료! !섯다 뽑기 로 패를 뽑아주세요!")
             start = 1
         else:
