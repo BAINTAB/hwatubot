@@ -7,10 +7,11 @@ client = discord.Client()
 
 player = [] #결과 저장
 join = [] #플레이 하는 플레이어 hash 저장
-hands = [] #join의 index 사용해서 플레이어 판별 + 플레이어의 카드 (0,1 인덱스에)
+maxjoin = 10
+hands = [[0 for col in range(2)] for row in range(maxjoin)] #join의 index 사용해서 플레이어 판별 + 플레이어의 카드 (0,1 인덱스에)
 cards = [] #현재 남은 카드
 start = 0 #시작했으면 1, 아니면 0
-maxjoin = 10
+
 
 # (지) pick : 뽑은 카드 이름, 섯다 뽑기의 for문에서 사용
 # (지) picker : 뽑은 사람을 join 인덱스로 찾고 저장, 섯다 뽑기의 for문에서 사용
@@ -59,13 +60,13 @@ async def on_message(message):
             for i in range(2):
                 pick = random.choice(cards)
                 picker = join.index(hash(message.author))
-                hands[picker,i] = pick
+                hands[picker][i] = pick
                 cards.remove(pick)
             channel = await message.author.create_dm()
             picker = join.index(hash(message.author))
-            await channel.send('{}, {} 패가 나왔습니다!'.format(hands[picker,0],hands[picker,1]))
+            await channel.send('{}, {} 패가 나왔습니다!'.format(hands[picker][0],hands[picker][1]))
             picker = join.index(hash(message.author))
-            player.append("{}님은 {}, {}".format(message.author.display_name,hands[picker,0],hands[picker,1]))
+            player.append("{}님은 {}, {}".format(message.author.display_name,hands[picker][0],hands[picker][1]))
             await message.channel.send("패 전송 완료! 플레이어 수 : {}/{}, 남은 카드 장수 : {}".format(len(join),maxjoin,len(cards)))
             
     
@@ -81,7 +82,7 @@ async def on_message(message):
                 time.sleep(1)
             player.clear()
             join.clear()
-            hands.clear()
+            hands = [[0 for col in range(2)] for row in range(maxjoin)]
             cards.clear()
             start=0
 
