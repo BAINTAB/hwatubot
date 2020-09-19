@@ -4,15 +4,16 @@ import time
 import os
 
 client = discord.Client()
+
 player = [] #결과 저장
 join = [] #플레이 하는 플레이어 hash 저장
 hands = [] #join의 index 사용해서 플레이어 판별 + 플레이어의 카드 (0,1 인덱스에)
 cards = [] #현재 남은 카드
-start = 0 #시작했으면 1, 아니면 0 사용하기 전에 global start 필수
-pick = "" #뽑은 카드 이름, 섯다 뽑기의 for문에서 사용
-# picker : 뽑은 사람을 join 인덱스로 찾고 저장, 섯다 뽑기의 for문에서 사용
-
+start = 0 #시작했으면 1, 아니면 0
 maxjoin = 10
+
+# (지) pick : 뽑은 카드 이름, 섯다 뽑기의 for문에서 사용
+# (지) picker : 뽑은 사람을 join 인덱스로 찾고 저장, 섯다 뽑기의 for문에서 사용
 
 @client.event
 async def on_ready():
@@ -21,6 +22,11 @@ async def on_ready():
 @client.event
 async def on_message(message):
     global start
+    global player
+    global join
+    global hands
+    global cards
+    global maxjoin
     
     if message.author == client.user:
         return
