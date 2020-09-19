@@ -33,7 +33,7 @@ async def on_message(message):
             rand.append(random.randint(0,1))
             channel = await message.author.create_dm()
             await channel.send('{}({}), {}({}) 패가 나왔습니다!'.format(rand[0],rand[1],rand[2],rand[3]))
-            player.append("{}님은 {}({}), {}({})".format(message.author,rand[0],rand[1],rand[2],rand[3]))
+            player.append("{}님은 {}({}), {}({})".format(message.author.display_name,rand[0],rand[1],rand[2],rand[3]))
             join.append(hash(message.author))
             await message.channel.send("패 전송 완료! 플레이어 수 : {}/{}".format(len(join),maxjoin))
             
