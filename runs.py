@@ -7,6 +7,7 @@ client = discord.Client()
 rand = []
 player = []
 join = []
+start = 0
 
 maxjoin = 10
 
@@ -22,7 +23,12 @@ async def on_message(message):
     if message.author.bot:
         return
     
-    if message.content == "!섯다":
+    if message.content == "!섯다"
+        await message.channel.send("!섯다 시작 : 섯다를 시작합니다.\n!섯다 뽑기 : 패를 뽑고 게임에 들어갑니다.\n섯다 패까 : 현재 게임에 들어와있는 사람들의 패를 깝니다.")
+    
+    if message.content == "!섯다 시작"
+        await message.channel.send("미구현. !섯다 뽑기를 사용해주세요.")
+    if message.content == "!섯다 뽑기":
         if hash(message.author) in join:
             await message.channel.send("이미 패를 받으셨습니다. 플레이어 수 : {}/{}".format(len(join),maxjoin))
         elif len(join) >= maxjoin:
@@ -40,7 +46,7 @@ async def on_message(message):
             await message.channel.send("패 전송 완료! 플레이어 수 : {}/{}".format(len(join),maxjoin))
             
     
-    if message.content == "!패까":
+    if message.content == "!섯다 패까":
         if len(join) <= 0:
             await message.channel.send("깔 패가 없습니다.")
         else:
