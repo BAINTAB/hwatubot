@@ -20,6 +20,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    global start
+    
     if message.author == client.user:
         return
 
@@ -30,7 +32,7 @@ async def on_message(message):
         await message.channel.send("!섯다 시작 : 섯다를 시작합니다.\n!섯다 뽑기 : 패를 뽑고 게임에 들어갑니다.\n!섯다 패까 : 현재 게임에 들어와있는 사람들의 패를 깝니다.")
     
     if message.content == "!섯다 시작":
-        if global start != 1:
+        if start != 1:
             cards.clear()
             cards = ["1","2","3","4","5","6","7","8","9","10","**1**","**2**","**3**","**4**","**5**","**6**","**7**","**8**","**9**","**10**"]
             await message.channel.send("모든 카드 섞기 완료! !섯다 뽑기 로 패를 뽑아주세요!")
@@ -39,7 +41,7 @@ async def on_message(message):
             await message.channel.send("이미 게임이 진행중입니다. 플레이어 수 : {}/{}".format(len(join),maxjoin))
     
     if message.content == "!섯다 뽑기":
-        if global start != 1:
+        if start != 1:
             await message.channel.send("현재 게임이 시작되지 않았습니다. !섯다 시작")
             return
         if hash(message.author) in join:
@@ -62,7 +64,7 @@ async def on_message(message):
             
     
     if message.content == "!섯다 패까":
-        if global start != 1:
+        if start != 1:
             await message.channel.send("현재 게임이 시작되지 않았습니다. !섯다 시작")
             return
         if len(join) <= 0:
