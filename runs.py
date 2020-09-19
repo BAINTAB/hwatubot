@@ -63,21 +63,19 @@ async def on_message(message):
         elif len(join) >= maxjoin:
             await message.channel.send("플레이어가 꽉 찼습니다. 다음 게임에 참가해주세요.")
         else:
-            pickinfo=[]
             join.append(hash(message.author))
-            pickinfo[0]=len(join)
             for i in range(2):
                 pick = random.choice(cards)
                 picker = join.index(hash(message.author))
                 hands[picker][i] = pick
                 cards.remove(pick)
-                pickinfo[1]=len(cards)
+            
             channel = await message.author.create_dm()
             picker = join.index(hash(message.author))
             await channel.send('{}, {} 패가 나왔습니다!'.format(hands[picker][0],hands[picker][1]))
             picker = join.index(hash(message.author))
             player.append("{}님은 {}, {}".format(message.author.display_name,hands[picker][0],hands[picker][1]))
-            await message.channel.send("패 전송 완료! 플레이어 수 : {}/{}, 남은 카드 장수 : {}".format(pickinfo[0],maxjoin,pickinfo[1]))
+            await message.channel.send("패 전송 완료! 플레이어 수 : {}/{}, 남은 카드 장수 : {}".format(len(join),maxjoin,len(cards)))
             
     
     if message.content == "!섯다 패까":
