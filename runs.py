@@ -59,13 +59,13 @@ async def on_message(message):
             for i in range(2):
                 pick = random.choice(cards)
                 picker = join.index(hash(message.author))
-                hands[picker][i] = pick
+                hands[picker,i] = pick
                 cards.remove(pick)
             channel = await message.author.create_dm()
             picker = join.index(hash(message.author))
-            await channel.send('{}, {} 패가 나왔습니다!'.format(hands[picker][0],hands[picker][1]))
+            await channel.send('{}, {} 패가 나왔습니다!'.format(hands[picker,0],hands[picker,1]))
             picker = join.index(hash(message.author))
-            player.append("{}님은 {}, {}".format(message.author.display_name,hands[picker][0],hands[picker][1]))
+            player.append("{}님은 {}, {}".format(message.author.display_name,hands[picker,0],hands[picker,1]))
             await message.channel.send("패 전송 완료! 플레이어 수 : {}/{}, 남은 카드 장수 : {}".format(len(join),maxjoin,len(cards)))
             
     
