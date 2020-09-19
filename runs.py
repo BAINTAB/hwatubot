@@ -1,5 +1,6 @@
 import discord
 import random
+import time
 import os
 
 client = discord.Client()
@@ -42,6 +43,7 @@ async def on_message(message):
     if message.content == "!패까":
         for say in player:
             await message.channel.send("{}".format(say))
+            time.sleep(1)
         player.clear()
         join.clear()
 
