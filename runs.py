@@ -38,10 +38,17 @@ async def on_message(message):
     if message.content == "!섯다":
         await message.channel.send("!섯다 시작 : 섯다를 시작합니다.\n!섯다 뽑기 : 패를 뽑고 게임에 들어갑니다.\n!섯다 패까 : 현재 게임에 들어와있는 사람들의 패를 깝니다.")
     
+    if message.contect == "!테스트"
+        await message.channel.send("{cards}")
+    
     if message.content == "!섯다 시작":
         if start != 1:
             cards.clear()
-            cards = ["1","2","3","4","5","6","7","8","9","10","__1__","__2__","__3__","__4__","__5__","__6__","__7__","__8__","__9__","__10__"]
+            for i in range(1,11)
+                cards.append("{i}")
+            for i in range(1,11)
+                cards.append("__"+"{i}"+"__") 
+            
             await message.channel.send("모든 카드 섞기 완료! !섯다 뽑기 로 패를 뽑아주세요!")
             start = 1
         else:
