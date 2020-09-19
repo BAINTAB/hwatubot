@@ -63,6 +63,7 @@ async def on_message(message):
         elif len(join) >= maxjoin:
             await message.channel.send("플레이어가 꽉 찼습니다. 다음 게임에 참가해주세요.")
         else:
+            pickinfo=[]
             join.append(hash(message.author))
             pickinfo[0]=len(join)
             for i in range(2):
