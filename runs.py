@@ -41,11 +41,14 @@ async def on_message(message):
             
     
     if message.content == "!패까":
-        for say in player:
-            await message.channel.send("{}".format(say))
-            time.sleep(1)
-        player.clear()
-        join.clear()
+        if len(join) <= 0:
+            await message.channel.send("깔 패가 없습니다.")
+        else:
+            for say in player:
+                await message.channel.send("{}".format(say))
+                time.sleep(1)
+            player.clear()
+            join.clear()
 
 access_token = os.environ["BOT_TOKEN"]
 client.run(access_token)
