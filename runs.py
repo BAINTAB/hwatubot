@@ -1,5 +1,6 @@
 import discord
 import random
+import os
 
 client = discord.Client()
 rand = []
@@ -39,4 +40,5 @@ async def on_message(message):
         player.clear()
         join.clear()
 
-client.run('NzU2Mzc5MTY2Nzg1NDA0OTcx.X2Q-_g.ZIdyHxyE5z1EgpQkBhIWithUE4g')
+access_token = os.environ["BOT_TOKEN"]
+client.run(access_token)
