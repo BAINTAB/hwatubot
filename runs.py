@@ -34,7 +34,7 @@ async def on_message(message):
             join.append(hash(message.author))
             
     
-    if message.content == "!실행":
+    if message.content == "!":
         for say in player:
             await message.channel.send("{}".format(say))
         player.clear()
