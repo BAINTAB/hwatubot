@@ -8,9 +8,9 @@ player = [] #결과 저장
 join = [] #플레이 하는 플레이어 hash 저장
 hands = [] #join의 index 사용해서 플레이어 판별 + 플레이어의 카드 (0,1 인덱스에)
 cards = [] #현재 남은 카드
-start = 0 #시작했으면 1, 아니면 0
+start = 0 #시작했으면 1, 아니면 0 사용하기 전에 global start 필수
 pick = "" #뽑은 카드 이름, 섯다 뽑기의 for문에서 사용
-picker = 0 #뽑은 사람을 join 인덱스로 찾고 저장, 섯다 뽑기의 for문에서 사용
+# picker : 뽑은 사람을 join 인덱스로 찾고 저장, 섯다 뽑기의 for문에서 사용
 
 maxjoin = 10
 
@@ -30,6 +30,7 @@ async def on_message(message):
         await message.channel.send("!섯다 시작 : 섯다를 시작합니다.\n!섯다 뽑기 : 패를 뽑고 게임에 들어갑니다.\n!섯다 패까 : 현재 게임에 들어와있는 사람들의 패를 깝니다.")
     
     if message.content == "!섯다 시작":
+        global start
         if start != 1:
             cards.clear()
             cards = ["1","2","3","4","5","6","7","8","9","10","**1**","**2**","**3**","**4**","**5**","**6**","**7**","**8**","**9**","**10**"]
@@ -39,6 +40,7 @@ async def on_message(message):
             await message.channel.send("이미 게임이 진행중입니다. 플레이어 수 : {}/{}".format(len(join),maxjoin))
     
     if message.content == "!섯다 뽑기":
+        global start
         if start != 1:
             await message.channel.send("현재 게임이 시작되지 않았습니다. !섯다 시작")
             return
@@ -62,6 +64,7 @@ async def on_message(message):
             
     
     if message.content == "!섯다 패까":
+        global start
         if start != 1:
             await message.channel.send("현재 게임이 시작되지 않았습니다. !섯다 시작")
             return
