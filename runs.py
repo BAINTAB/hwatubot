@@ -23,11 +23,12 @@ async def on_message(message):
     if message.author.bot:
         return
     
-    if message.content == "!섯다"
+    if message.content == "!섯다":
         await message.channel.send("!섯다 시작 : 섯다를 시작합니다.\n!섯다 뽑기 : 패를 뽑고 게임에 들어갑니다.\n섯다 패까 : 현재 게임에 들어와있는 사람들의 패를 깝니다.")
     
-    if message.content == "!섯다 시작"
+    if message.content == "!섯다 시작":
         await message.channel.send("미구현. !섯다 뽑기를 사용해주세요.")
+    
     if message.content == "!섯다 뽑기":
         if hash(message.author) in join:
             await message.channel.send("이미 패를 받으셨습니다. 플레이어 수 : {}/{}".format(len(join),maxjoin))
