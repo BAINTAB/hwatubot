@@ -15,6 +15,7 @@ start = 0 #시작했으면 1, 아니면 0
 
 # (지) pick : 뽑은 카드 이름, 섯다 뽑기의 for문에서 사용
 # (지) picker : 뽑은 사람을 join 인덱스로 찾고 저장, 섯다 뽑기의 for문에서 사용
+# (지) pickinfo : 카드를 뽑을 때 남은 플레이어 수, 카드 남은 장수 저장하여 겹치기 방지
 
 @client.event
 async def on_ready():
@@ -63,17 +64,19 @@ async def on_message(message):
             await message.channel.send("플레이어가 꽉 찼습니다. 다음 게임에 참가해주세요.")
         else:
             join.append(hash(message.author))
+            pickinfo[0]=len(join)
             for i in range(2):
                 pick = random.choice(cards)
                 picker = join.index(hash(message.author))
                 hands[picker][i] = pick
                 cards.remove(pick)
+                pickinfo[1]=len(cards)
             channel = await message.author.create_dm()
             picker = join.index(hash(message.author))
             await channel.send('{}, {} 패가 나왔습니다!'.format(hands[picker][0],hands[picker][1]))
             picker = join.index(hash(message.author))
             player.append("{}님은 {}, {}".format(message.author.display_name,hands[picker][0],hands[picker][1]))
-            await message.channel.send("패 전송 완료! 플레이어 수 : {}/{}, 남은 카드 장수 : {}".format(len(join),maxjoin,len(cards)))
+            await message.channel.send("패 전송 완료! 플레이어 수 : {}/{}, 남은 카드 장수 : {}".format(pickinfo[0],maxjoin,pickinfo[1]))
             
     
     if message.content == "!섯다 패까":
